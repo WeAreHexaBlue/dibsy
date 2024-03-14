@@ -9,11 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "ip": "^2.0.0",
-    "next": "14.1.0",
+    "next": "14.1.3",
+    "peersy": "^0.1.0",
     "react": "^18",
-    "react-dom": "^18",
-    "simple-peer": "^9.11.1"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",
