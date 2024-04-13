@@ -15,8 +15,17 @@ export async function POST(req: NextRequest) {
         return res(400, "Request body does not follow the `UsersPOST` format OR required arguments were not passed. Check the documentation.")
     }
 
+    let storageSelf = localStorage.getItem("peer")
+    if (!storageSelf) {
+        return res(401, "No Peer data in localStorage.")
+    }
+
     let self: peersy.Peer
-    // UNFINISHED
+    try {
+        self = JSON.parse(storageSelf)
+    } catch (e) {
+        return res(500, "localStorage Peer data is not compatible with `peersy.Peer` type, somehow.")
+    }
 }
 
 export { notAllowed as GET }
