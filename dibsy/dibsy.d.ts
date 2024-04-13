@@ -1,5 +1,6 @@
 export interface Content {
     id: number,
+    type: ContentType,
     signed: string
 }
 
@@ -66,6 +67,15 @@ export interface User extends Content {
     profile: Profile,
     posts: Post[],
     comments: Comment[]
+}
+
+export enum ContentType {
+    USER,
+    PROFILE,
+    POST,
+    REPOST,
+    COMMENT,
+    MEDIA
 }
 
 export enum PostType {

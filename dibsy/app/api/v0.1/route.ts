@@ -1,5 +1,5 @@
 import * as peersy from "peersy"
-import { res, notAllowed } from "../../../utils"
+import { res, notAllowed } from "@/utils"
 
 export function GET() {
     const host = `${process.env.PROTOCOL}://${process.env.DOMAIN}/api/v0.1`
@@ -16,6 +16,11 @@ export function GET() {
                 url: `${host}`,
                 description: "Shows information about the API.",
                 methods: ["GET"]
+            },
+            {
+                url: `${host}/users`,
+                description: "Creates a user account.",
+                methods: ["POST"]
             }
         ]
     })

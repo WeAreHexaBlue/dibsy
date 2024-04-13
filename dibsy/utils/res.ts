@@ -8,7 +8,8 @@ export const status: {[key: number]: string} = {
     401: "Unauthorized",
     403: "Forbidden",
     404: "Not Found",
-    405: "Method Not Allowed"
+    405: "Method Not Allowed",
+    418: "I'm a teapot!"
 }
 
 export function res(code: number, info: string, data?: any) {

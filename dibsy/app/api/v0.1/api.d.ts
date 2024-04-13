@@ -1,1 +1,4 @@
-export interface Create {}
+export interface UsersPOST {
+    username: string,
+    password: string
+}
