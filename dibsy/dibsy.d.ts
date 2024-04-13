@@ -1,6 +1,6 @@
 export interface Content {
     id: number,
-    signature: string
+    signed: string
 }
 
 export interface Media extends Content {
@@ -17,6 +17,15 @@ export interface Comment extends Content {
     attachments?: Media[],
 
     replies: Comment[]
+
+    author: User
+}
+
+export interface Repost extends Content {
+    origin: Post,
+    quote?: string,
+
+    author: User
 }
 
 export interface Post extends Content {
