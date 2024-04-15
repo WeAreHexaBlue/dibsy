@@ -1,14 +1,15 @@
 import * as peersy from "peersy"
 import { res, notAllowed } from "@/utils"
 import { NextRequest } from "next/server"
-import type { UsersPOST } from "../api"
+import * as dibsy from "@/dibsy"
+import * as api from "@/api"
 
 export async function POST(req: NextRequest) {
     if (!req.body) {
         return res(400, "Request body is not present.")
     }
 
-    let rdata: UsersPOST
+    let rdata: api.UsersPOST
     try {
         rdata = await req.json()
     } catch (e) {
