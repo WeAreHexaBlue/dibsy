@@ -17,7 +17,7 @@ export interface Comment extends Content {
 
     attachments?: Media[],
 
-    replies: Comment[]
+    replies: Comment[],
 
     author: User
 }
@@ -39,7 +39,7 @@ export interface Post extends Content {
 
     tags?: string[],
 
-    comments: Comment[]
+    comments: Comment[],
 
     author: User
 }
@@ -60,9 +60,8 @@ export interface Profile extends Content {
 export interface User extends Content {
     username: string,
     password: string,
-    signature: string,
 
-    bot: boolean
+    bot: boolean,
 
     profile: Profile,
     posts: Post[],

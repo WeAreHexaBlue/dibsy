@@ -1,6 +1,7 @@
 import * as peersy from "peersy"
-import { res, notAllowed } from "@/utils"
 import { NextRequest } from "next/server"
+import { res, notAllowed } from "@/utils"
+import * as crypto from "crypto"
 import * as dibsy from "@/dibsy"
 import * as api from "@/api"
 
@@ -24,6 +25,18 @@ export async function POST(req: NextRequest) {
     let peer = peersy.connectedPeers.find(peer => peer.publicKey === headerPeer)
     if (!peer) {
         return res(404, "Couldn't find you in the `peersy.connectedPeers` array.")
+    }
+
+    let salt = crypto.randomBytes(16).toString("hex")
+
+    let user: dibsy.User = {
+        username: rdata.username,
+        password: crypto.scryptSync(rdata.password, salt, 64).toString("hex"),
+        bot: false,
+        profile: {
+            name: rdata.username
+            // unfinished
+        }
     }
 }
 
