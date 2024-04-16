@@ -16,16 +16,14 @@ export async function POST(req: NextRequest) {
         return res(400, "Request body does not follow the `UsersPOST` format OR required arguments were not passed. Check the documentation.")
     }
 
-    let storageSelf = localStorage.getItem("peer")
-    if (!storageSelf) {
-        return res(401, "No Peer data in localStorage.")
+    let headerPeer = req.headers.get("peer")
+    if (!headerPeer) {
+        return res(401, "Request header `peer` is missing. Please include your public key.")
     }
 
-    let self: peersy.Peer
-    try {
-        self = JSON.parse(storageSelf)
-    } catch (e) {
-        return res(500, "localStorage Peer data is not compatible with `peersy.Peer` type, somehow.")
+    let peer = peersy.connectedPeers.find(peer => peer.publicKey === headerPeer)
+    if (!peer) {
+        return res(404, "Couldn't find you in the `peersy.connectedPeers` array.")
     }
 }
 
