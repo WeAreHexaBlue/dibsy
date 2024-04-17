@@ -4,7 +4,7 @@ export interface Content {
     signed: string
 }
 
-export interface Media extends Content {
+export interface Media {
     bytes: string,
     format: string,
 
@@ -12,7 +12,7 @@ export interface Media extends Content {
     ai: boolean
 }
 
-export interface Comment extends Content {
+export interface Comment {
     content: string,
 
     attachments?: Media[],
@@ -22,14 +22,14 @@ export interface Comment extends Content {
     author: User
 }
 
-export interface Repost extends Content {
+export interface Repost {
     origin: Post,
     quote?: string,
 
     author: User
 }
 
-export interface Post extends Content {
+export interface Post {
     type: PostType,
 
     title?: string,
@@ -44,10 +44,10 @@ export interface Post extends Content {
     author: User
 }
 
-export interface Profile extends Content {
+export interface Profile {
     name: string,
 
-    avatar: Media,
+    avatar: Media | "default",
     banner?: Media,
 
     bio?: string,
@@ -57,13 +57,13 @@ export interface Profile extends Content {
     user: User
 }
 
-export interface User extends Content {
+export interface User {
     username: string,
     password: string,
 
     bot: boolean,
 
-    profile: Profile,
+    profile?: Profile,
     posts: Post[],
     comments: Comment[]
 }

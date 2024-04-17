@@ -33,11 +33,18 @@ export async function POST(req: NextRequest) {
         username: rdata.username,
         password: crypto.scryptSync(rdata.password, salt, 64).toString("hex"),
         bot: false,
-        profile: {
-            name: rdata.username
-            // unfinished
-        }
+        posts: [],
+        comments: []
     }
+    user.profile = {
+        name: rdata.username,
+        avatar: "default",
+        user: user
+    }
+
+    let contentified = peersy.makeContent(user)
+
+    return res(201, "Success.", contentified)
 }
 
 export { notAllowed as GET }
