@@ -17,6 +17,7 @@ export async function POST(req: NextRequest) {
         return res(400, "Request body does not follow the `UsersPOST` format OR required arguments were not passed. Check the documentation.")
     }
 
+    // NOT SECURE! FIND FIX LATER!
     let headerPeer = req.headers.get("peer")
     if (!headerPeer) {
         return res(401, "Request header `peer` is missing. Please include your public key.")
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
 
     let user: dibsy.User = {
         username: rdata.username,
-        password: crypto.scryptSync(rdata.password, salt, 64).toString("hex"),
+        password: `${salt}:${crypto.scryptSync(rdata.password, salt, 64).toString("hex")}`,
         bot: false,
         posts: [],
         comments: []
