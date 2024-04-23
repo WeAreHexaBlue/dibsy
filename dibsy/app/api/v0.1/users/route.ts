@@ -17,17 +17,6 @@ export async function POST(req: NextRequest) {
         return res(400, "Request body does not follow the `UsersPOST` format OR required arguments were not passed. Check the documentation.")
     }
 
-    // NOT SECURE! FIND FIX LATER!
-    let headerPeer = req.headers.get("peer")
-    if (!headerPeer) {
-        return res(401, "Request header `peer` is missing. Please include your public key.")
-    }
-
-    let peer = peersy.connectedPeers.find(peer => peer.publicKey === headerPeer)
-    if (!peer) {
-        return res(404, "Couldn't find you in the `peersy.connectedPeers` array.")
-    }
-
     let salt = crypto.randomBytes(16).toString("hex")
 
     let user: dibsy.User = {
